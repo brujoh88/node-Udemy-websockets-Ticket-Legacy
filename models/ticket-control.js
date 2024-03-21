@@ -31,7 +31,7 @@ class TicketControl {
         const {hoy, tickets, ultimosCuatros, ultimo} = require('../db/data.json')
         
         if (hoy === this.hoy) {
-            this.ticket = tickets
+            this.tickets = tickets
             this.ultimo = ultimo
             this.ultimosCuatros = ultimosCuatros           
         }else{
@@ -47,17 +47,17 @@ class TicketControl {
     siguiente(){
         this.ultimo ++
         const ticket = new Ticket(this.ultimo, null)
-        this.ticket.push(ticket)
+        this.tickets.push(ticket)
         this.guardarDB()
         return 'Ticket ' + ticket.numero
     }
 
     atenderTicket(escritorio){
         // No tenemos tickets
-        if (this.ticket.length === 0) {
+        if (this.tickets.length === 0) {
             return null            
         }
-        const ticket = this.ticket.shift()//this.ticket[0]
+        const ticket = this.tickets.shift()//this.ticket[0]
         ticket.escritorio = escritorio
         
         this.ultimosCuatros.unshift(ticket)
