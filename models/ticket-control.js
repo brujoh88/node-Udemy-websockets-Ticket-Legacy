@@ -52,21 +52,25 @@ class TicketControl {
         return 'Ticket ' + ticket.numero
     }
 
-    atenderTicket(escritorio){
+    atenderTicket(escritorio) {
+
         // No tenemos tickets
-        if (this.tickets.length === 0) {
-            return null            
+        if ( this.tickets.length === 0 ) {
+            return null;
         }
-        const ticket = this.tickets.shift()//this.ticket[0]
-        ticket.escritorio = escritorio
-        
-        this.ultimosCuatros.unshift(ticket)
-        
-        if (this.ultimosCuatros.length > 4) {
-            this.ultimosCuatros.slice(-1,1)                        
+
+        const ticket = this.tickets.shift(); // this.tickets[0];
+        ticket.escritorio = escritorio;
+
+        this.ultimosCuatros.unshift( ticket );
+
+        if ( this.ultimosCuatros.length > 4 ) {
+            this.ultimosCuatros.splice(-1,1);
         }
-        this.guardarDB()
-        return ticket
+
+        this.guardarDB();
+
+        return ticket;
     }
 }
 

@@ -6,6 +6,7 @@ const socketController = (socket) => {
 
 
     socket.emit('ultimo-ticket', ticketControl.ultimo)
+    socket.emit('estado-actual',ticketControl.ultimosCuatros)
 
     socket.on('crear_ticket', ( payload, callback ) => {       
 
@@ -24,6 +25,7 @@ const socketController = (socket) => {
         })
        }
        const ticket = ticketControl.atenderTicket(escritorio)
+       socket.broadcast.emit('estado-actual',ticketControl.ultimosCuatros)
        //TODO Notificar cambios en los ultimosCuatros
        if (!ticket) {
         return callback({
